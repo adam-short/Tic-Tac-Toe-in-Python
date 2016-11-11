@@ -4,8 +4,9 @@
 #Default Positions
 positions = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 
-winner = False
+global winner
 
+winner = False
 
 
 #Function to print board
@@ -26,16 +27,13 @@ def board(pos):
 #board(positions)
 
 #Check if the player wins
-#Super hardcore logic found here
 def check_win(pos, xo):
     xo_count = pos.count(xo)
     print("\nThere are "+str(xo_count)+" "+xo+"'s")
     if(xo_count > 2):
-        #Well let's get started shall we
+        #Below code checks for every possible win, if the amount of player x or o's is above 2
 
-        #print(xo)
-
-        #3 in a row horizontally (0-2, 3-5, 6-8)
+        #3 in a row horizontally (0,1,2) (3,4,5) (6,7,8)
         if(pos[0] == xo and pos[1] == xo and pos[2] == xo):
             return True
         elif(pos[3] == xo and pos[4] == xo and pos[5] == xo):
@@ -72,6 +70,7 @@ def check_space(pos, num):
 #For choosing a space on the board
 #Takes in either an 'x' or an 'o'
 def choose(xo):
+    global winner
     print("Choose a space (1-9)")
     space = int(input("Space: "))
     space = space - 1
@@ -104,33 +103,8 @@ def player_vs_player():
 
         i = i + 1
 
-'''
-def player_vs_player():
-    board(positions)
-    print("\nPlayer 1")
-    if choose('x'):
-        choose('x')
-
-    print("\nPlayer 2")
-    if choose('o'):
-        choose('o')
-
-    print("\nPlayer 1")
-    if choose('x'):
-        choose('x')
-
-    print("\nPlayer 2")
-    if choose('o'):
-        choose('o')
-
-    print("\nPlayer 1")
-    if choose('x'):
-        choose('x')
-
-    print("\nPlayer 2")
-    if choose('o'):
-        choose('o')
-'''
+    #Ran once the game has been run
+    print("End")
 
 
 def player_vs_computer():
