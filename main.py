@@ -1,5 +1,4 @@
 #TIC TAC TOE BY FLYNN TESORIERO
-#TODO: Get winning working!!
 
 #Default Positions
 positions = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
@@ -13,16 +12,13 @@ winner = False
 #1 (a) is in the bottom left corner, like a num pad.
 #9 (i) in in the top right corner.
 def board(pos):
-    print(" _________________")
-    print("|     |     |     |")
-    print("|  "+pos[6]+"  |  "+pos[7]+"  |  "+pos[8]+"  |")
-    print("|_____|_____|_____|")
-    print("|     |     |     |")
-    print("|  "+pos[3]+"  |  "+pos[4]+"  |  "+pos[5]+"  |")
-    print("|_____|_____|_____|")
-    print("|     |     |     |")
-    print("|  "+pos[0]+"  |  "+pos[1]+"  |  "+pos[2]+"  |")
-    print("|_____|_____|_____|")
+    print("┌───┬───┬───┐")
+    print("│ "+pos[6]+" │ "+pos[7]+" │ "+pos[8]+" │")
+    print("├───┼───┼───┤")
+    print("│ "+pos[3]+" │ "+pos[4]+" │ "+pos[5]+" │")
+    print("├───┼───┼───┤")
+    print("│ "+pos[0]+" │ "+pos[1]+" │ "+pos[2]+" │")
+    print("└───┴───┴───┘")
 
 #board(positions)
 
@@ -61,8 +57,8 @@ def check_win(pos, xo):
 def check_space(pos, num):
     print(pos[num])
     if(pos[num] != " "):
-        print(pos[num])
-        print("You fail")
+        #print(pos[num])
+        print("That spot is taken!")
         return False
     else:
         return True
@@ -96,10 +92,15 @@ def player_vs_player():
             print("\nPlayer 2")
             if choose('o'):
                 choose('o')
+            else:
+                print("choose again")
+                i = i - 1
         else:
             print("\nPlayer 1")
             if choose('x'):
                 choose('x')
+            else:
+                print("choose again")
 
         i = i + 1
 
