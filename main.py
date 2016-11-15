@@ -14,6 +14,14 @@ class colour:
     bold = '\033[1m'
     underline = '\033[4m'
 
+def coltest():
+    print(colour.purple+"Purple")
+    print(colour.blue+"Blue")
+    print(colour.green+"Green")
+    print(colour.yellow+"Yellow")
+    print(colour.red+"Red\n"+colour.end)
+
+
 #Set up globals
 global winner
 global i
@@ -36,7 +44,7 @@ def board(pos):
 
 #board(positions)
 
-#Check if the player wins
+#Check if your
 def check_win(pos, xo):
     xo_count = pos.count(xo)
     #print("\nThere are "+str(xo_count)+" "+xo+"'s")
@@ -99,7 +107,7 @@ def choose(xo):
 
 #winner variable may be an issue (not global or some shit)
 def player_vs_player():
-    print("\n-------------\n Begin Game!\n-------------")
+    print(colour.bold+"\n-------------\n Begin Game!\n-------------"+colour.end)
     board(positions)
     global i
     while(winner != True):
@@ -110,19 +118,19 @@ def player_vs_player():
             else:
                 print("choose again")
         else:
-            print("Player X")
+            print(colour.yellow+"Player X"+colour.end)
             if choose('x'):
                 i = i + 1
             else:
                 print("choose again")
 
 
-    #Ran once the game has been run
+    #All good things must come to an...
     print("End")
 
 
 def player_vs_computer():
-    # Difficulty Selection
+    #You like it hard or soft ;)
     print("\nSelect Difficultly")
     print("1: Simple")
     print("2: Hard")
@@ -154,7 +162,7 @@ def play():
 
 
 def help():
-    print("\n------\n Help\n------")
+    print(colour.bold+"\n------\n Help\n------"+colour.end)
     print("Tic tac toe is played... bla bla bla")
     print("This is what the board looks like...")
     help_pos = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -162,7 +170,7 @@ def help():
     print("\nThe board is numbered from 1 in the bottom left to 9 in the top right, like a computer num pad.")
     print("More description needed...")
 
-    #Back
+    #Take me back...
     if (input("Press enter to return")):
         menu()
     else:
@@ -171,7 +179,7 @@ def help():
 
 #Menu
 def menu():
-    print("===================================\n"+colour.green+" Welcome to Tic Tac Toe in Python!"+colour.end+"\n===================================\n")
+    print("===================================\n"+colour.green+colour.bold+" Welcome to Tic Tac Toe in Python!"+colour.end+"\n===================================\n")
     print(colour.bold+"Select one of the below options:"+colour.end)
     print("1. Play")
     print("2. Help")
@@ -185,7 +193,8 @@ def menu():
     elif (menu_selection == 2):
         help()
     else:
-        print("Bye!")
+        print("Bye")
 
 #Let's get this show on the road!
+coltest()
 menu()
