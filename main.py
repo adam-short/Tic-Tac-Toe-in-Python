@@ -3,16 +3,30 @@
 #Default Positions
 positions = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 
+#Some nice colour
+class colour:
+    purple = '\033[95m' #Purple
+    blue = '\033[94m' #Dark blue / purple
+    green = '\033[92m' #Bright Green
+    yellow = '\033[93m' #Yellow
+    red = '\033[91m' #red
+    end = '\033[0m'
+    bold = '\033[1m'
+    underline = '\033[4m'
+
+#Set up globals
 global winner
+global i
 
+#Define globals
 winner = False
-
+i = 1
 
 #Function to print board
 #1 (a) is in the bottom left corner, like a num pad.
 #9 (i) in in the top right corner.
 def board(pos):
-    print("┌───┬───┬───┐")
+    print("\n┌───┬───┬───┐")
     print("│ "+pos[6]+" │ "+pos[7]+" │ "+pos[8]+" │")
     print("├───┼───┼───┤")
     print("│ "+pos[3]+" │ "+pos[4]+" │ "+pos[5]+" │")
@@ -25,7 +39,7 @@ def board(pos):
 #Check if the player wins
 def check_win(pos, xo):
     xo_count = pos.count(xo)
-    print("\nThere are "+str(xo_count)+" "+xo+"'s")
+    #print("\nThere are "+str(xo_count)+" "+xo+"'s")
     if(xo_count > 2):
         #Below code checks for every possible win, if the amount of player x or o's is above 2
 
@@ -55,7 +69,7 @@ def check_win(pos, xo):
 #For checking the space
 #Takes in a position an position number
 def check_space(pos, num):
-    print(pos[num])
+    #print(pos[num])
     if(pos[num] != " "):
         #print(pos[num])
         print("That spot is taken!")
@@ -67,6 +81,7 @@ def check_space(pos, num):
 #Takes in either an 'x' or an 'o'
 def choose(xo):
     global winner
+    print("-------")
     print("Choose a space (1-9)")
     space = int(input("Space: "))
     space = space - 1
@@ -78,31 +93,29 @@ def choose(xo):
         if check_win(positions, xo):
             print("Winner!!!")
             winner = True
+        return True
     else:
         return False
 
 #winner variable may be an issue (not global or some shit)
 def player_vs_player():
+    print("\n-------------\n Begin Game!\n-------------")
     board(positions)
-    i = 1
+    global i
     while(winner != True):
-        print("This is turn number " + str(i))
-
         if (i % 2 == 0):
-            print("\nPlayer 2")
+            print("Player O")
             if choose('o'):
-                choose('o')
+                i = i + 1
             else:
                 print("choose again")
-                i = i - 1
         else:
-            print("\nPlayer 1")
+            print("Player X")
             if choose('x'):
-                choose('x')
+                i = i + 1
             else:
                 print("choose again")
 
-        i = i + 1
 
     #Ran once the game has been run
     print("End")
@@ -126,7 +139,7 @@ def player_vs_computer():
 
 def play():
     #Player or computer selection
-    print("\nSelect Game Mode")
+    print(colour.bold+"\nSelect Game Mode"+colour.end)
     print("1: Player vs Player")
     print("2: Player vs Computer")
 
@@ -141,7 +154,7 @@ def play():
 
 
 def help():
-    print("\nHELP")
+    print("\n------\n Help\n------")
     print("Tic tac toe is played... bla bla bla")
     print("This is what the board looks like...")
     help_pos = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -158,8 +171,8 @@ def help():
 
 #Menu
 def menu():
-    print("\nWelcome to Tic Tac Toe in Python!\n")
-    print("Select one of the below options:")
+    print("===================================\n"+colour.green+" Welcome to Tic Tac Toe in Python!"+colour.end+"\n===================================\n")
+    print(colour.bold+"Select one of the below options:"+colour.end)
     print("1. Play")
     print("2. Help")
     print("3. Quit")
@@ -174,17 +187,5 @@ def menu():
     else:
         print("Bye!")
 
-#run game
+#Let's get this show on the road!
 menu()
-
-
-#  _________________
-# |     |     |     |
-# |  x  |  x  |  x  |
-# |_____|_____|_____|
-# |     |     |     |
-# |  x  |  x  |  x  |
-# |_____|_____|_____|
-# |     |     |     |
-# |  x  |  x  |  x  |
-# |_____|_____|_____|
