@@ -44,6 +44,22 @@ def board(pos):
 
 #board(positions)
 
+#Check inputs
+#input should be passed as string
+def inputcheck(low, high, input):
+    try:
+        int(input)
+    except ValueError:
+        print("Please enter a valid number")
+        return False
+    else:
+        parsedinput = int(input)
+        if(parsedinput <= high and parsedinput >= low):
+            return parsedinput
+        else:
+            return False
+
+
 #Check if your
 def check_win(pos, xo):
     xo_count = pos.count(xo)
@@ -172,29 +188,43 @@ def help():
 
     #Take me back...
     if (input("Press enter to return")):
-        menu()
+        welcome()
     else:
-        menu()
+        welcome()
 
 
 #Menu
-def menu():
+def welcome():
     print("===================================\n"+colour.green+colour.bold+" Welcome to Tic Tac Toe in Python!"+colour.end+"\n===================================\n")
     print(colour.bold+"Select one of the below options:"+colour.end)
     print("1. Play")
     print("2. Help")
     print("3. Quit")
 
+def menu():
     #Menu selection
     menu_selection = input("Selection: ")
-    menu_selection = int(menu_selection)
-    if (menu_selection == 1):
-        play()
-    elif (menu_selection == 2):
-        help()
+
+    if(inputcheck(1,3,menu_selection) != False):
+        menu_selection = inputcheck(1,3,menu_selection)
+        # menu_selection = int(menu_selection)
+        if (menu_selection == 1):
+            play()
+        elif (menu_selection == 2):
+            help()
+        else:
+            print("Bye")
+            quit()
     else:
-        print("Bye")
+        print(colour.red+"Please choose again\n"+colour.end)
+
 
 #Let's get this show on the road!
-coltest()
-menu()
+#coltest()
+welcome()
+
+while True:
+    menu()
+
+#test = input("test: ")
+#inputcheck(1,10,test)
