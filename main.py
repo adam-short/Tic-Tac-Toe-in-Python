@@ -1,7 +1,11 @@
 #TIC TAC TOE BY FLYNN TESORIERO
+#TODO: Clean the positions list after winning
 
 #For delays
 import time
+
+#For computer player
+from random import randint
 
 #Default Positions
 positions = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
@@ -60,7 +64,7 @@ def board(pos):
 
 #Check inputs
 #input should be passed as string
-def inputcheck(low, high, input):
+def input_check(low, high, input):
     try:
         int(input)
     except ValueError:
@@ -73,7 +77,7 @@ def inputcheck(low, high, input):
             return False
 
 
-#Check if your
+#Check if your a winner
 def check_win(pos, xo):
     xo_count = pos.count(xo)
     #print("\nThere are "+str(xo_count)+" "+xo+"'s")
@@ -102,6 +106,12 @@ def check_win(pos, xo):
         elif (pos[2] == xo and pos[4] == xo and pos[6] == xo):
             return True
 
+def check_tie(pos):
+    for i in pos:
+        if(i == " "):
+            return False
+    return True
+
 def win(xo):
     if (xo == "x"):
         print(colour.green + "\n __  __   __        __  ___   _   _   ____  ")
@@ -112,7 +122,7 @@ def win(xo):
         time.sleep(0.5)
         print("  /  \      \ V  V /    | |  | |\  |  ___) |")
         time.sleep(0.5)
-        print(" /_/\_\      \_/\_/    |___| |_| \_| |____/ "+colour.end)
+        print(" /_/\_\      \_/\_/    |___| |_| \_| |____/ \n"+colour.end)
         time.sleep(0.5)
     elif (xo == "o"):
         print(colour.purple + "\n   ___     __        __  ___   _   _   ____  ")
@@ -123,7 +133,7 @@ def win(xo):
         time.sleep(0.5)
         print(" | |_| |     \ V  V /    | |  | |\  |  ___) |")
         time.sleep(0.5)
-        print("  \___/       \_/\_/    |___| |_| \_| |____/ "+colour.end)
+        print("  \___/       \_/\_/    |___| |_| \_| |____/ \n"+colour.end)
         time.sleep(0.5)
 
 #For checking the space
@@ -132,7 +142,7 @@ def check_space(pos, num):
     #print(pos[num])
     if(pos[num] != " "):
         #print(pos[num])
-        print("\nThat spot is taken! Choose a different spot")
+        #print("\nThat spot is taken! Choose a different spot")
         return False
     else:
         return True
@@ -147,10 +157,13 @@ def choose(xo):
 
     if check_space(positions, space):
         positions[space] = xo
-        board(positions)
+        #board(positions)
 
         if check_win(positions, xo):
             win(xo)
+            winner = True
+        elif check_tie(positions):
+            print("\nIt's a tie!"+colour.end)
             winner = True
         return True
     else:
@@ -166,15 +179,31 @@ def player_vs_player():
             print(colour.purple+"It's player O's turn!")
             if choose('o'):
                 i = i + 1
-            #else:
-            #    print("choose again")
+                board(positions)
+            else:
+                print("\nThat spot is taken! Choose a different spot")
         else:
             print(colour.green+"It's player X's turn!")
             if choose('x'):
                 i = i + 1
-            #else:
-            #    print("choose again")
+                board(positions)
+            else:
+                print("\nThat spot is taken! Choose a different spot")
 
+def computer_easy():
+    global winner
+    rand = randint(0,8)
+    #print(rand)
+    if check_space(positions, rand):
+        positions[rand] = 'o'
+        if check_win(positions, 'o'):
+            win('o')
+            winner = True
+        elif check_tie(positions):
+            print("\nIt's a tie!"+colour.end)
+            winner = True
+        #board(positions)
+        return True
 
 def player_vs_computer():
     print("\nSelect Difficultly")
@@ -184,8 +213,33 @@ def player_vs_computer():
     difficultly_selection = input("Selection: ")
     difficultly_selection = int(difficultly_selection)
     if (difficultly_selection == 1):
-        print("Simple")
-        difficulty = 1
+        print(colour.bold + "\n-------------\n Begin Game!\n-------------" + colour.end)
+        board(positions)
+        global i
+        while (winner != True):
+            if (i % 2 == 0):
+                #print(colour.purple + "It's the computers turn!"+colour.end)
+                if computer_easy():
+                    board(positions)
+                    i = i + 1
+                #else:
+                #    print("\nThat spot is taken! Choose a different spot")
+            else:
+                print(colour.green)
+                if choose('x'):
+                    i = i + 1
+                    #board(positions)
+                else:
+                    print("\nThat spot is taken! Choose a different spot")
+        # Take me back...
+        if (input("Press enter to return to menu")):
+            print("\n")
+            welcome()
+        else:
+            print("\n")
+            welcome()
+
+
     elif (difficultly_selection == 2):
         print("Hard")
         difficulty = 2
@@ -201,8 +255,8 @@ def play():
 
     game_selection = int(game_selection)
 
-    if (inputcheck(1, 2, game_selection) != False):
-        game_selection = inputcheck(1, 2, game_selection)
+    if (input_check(1, 2, game_selection) != False):
+        game_selection = input_check(1, 2, game_selection)
         if (game_selection == 1):
             player_vs_player()
         elif (game_selection == 2):
@@ -237,8 +291,8 @@ def menu():
     #Menu selection
     menu_selection = input("Selection: ")
 
-    if(inputcheck(1,3,menu_selection) != False):
-        menu_selection = inputcheck(1,3,menu_selection)
+    if(input_check(1,3,menu_selection) != False):
+        menu_selection = input_check(1,3,menu_selection)
         # menu_selection = int(menu_selection)
         if (menu_selection == 1):
             play()
@@ -260,5 +314,5 @@ while True:
 #Unit Tests:
 #coltest()
 #test = input("test: ")
-#inputcheck(1,10,test)
+#input_check(1,10,test)
 
