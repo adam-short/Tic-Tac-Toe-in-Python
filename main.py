@@ -5,7 +5,7 @@
 import time
 
 #For computer player
-from random import randint
+import random
 
 #Default Positions
 positions = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
@@ -205,6 +205,55 @@ def computer_easy():
         #board(positions)
         return True
 
+
+def computer_hard(turn):
+    global winner
+    print(turn)
+    if(turn == 2):
+        print("Computer 1")
+        if(positions[4] == "x"):
+            positions[0] = 'o'
+        else:
+            positions[4] = 'o'
+        return True
+
+    if (turn == 4):
+        print("Computer 2")
+        if worker(positions) == False:
+            if (positions[0] == "o"):
+                if (positions[3] == " "):
+                    positions[3] = 'o'
+                elif (positions[1] == " "):
+                    positions[1] = 'o'
+            elif (positions[4] == "o"):
+                if (positions[1] == " "):
+                    positions[1] = 'o'
+                elif (positions[5] == " "):
+                    positions[5] = 'o'
+                elif (positions[7] == " "):
+                    positions[7] = 'o'
+            else:
+                print("This should never be seen")
+        return True
+
+    if (turn == 6):
+        print("Computer 3")
+        worker1(positions)
+        return True
+
+    #print(rand)
+    '''if check_space(positions, rand):
+        positions[rand] = 'o'
+        if check_win(positions, 'o'):
+            win('o')
+            winner = True
+        elif check_tie(positions):
+            print("\nIt's a tie!"+colour.end)
+            winner = True
+    '''
+        #board(positions)
+    #return True
+
 def player_vs_computer():
     print("\nSelect Difficultly")
     print("1: Simple")
@@ -212,6 +261,7 @@ def player_vs_computer():
 
     difficultly_selection = input("Selection: ")
     difficultly_selection = int(difficultly_selection)
+
     if (difficultly_selection == 1):
         print(colour.bold + "\n-------------\n Begin Game!\n-------------" + colour.end)
         board(positions)
@@ -231,6 +281,7 @@ def player_vs_computer():
                     #board(positions)
                 else:
                     print("\nThat spot is taken! Choose a different spot")
+
         # Take me back...
         if (input("Press enter to return to menu")):
             print("\n")
@@ -242,7 +293,25 @@ def player_vs_computer():
 
     elif (difficultly_selection == 2):
         print("Hard")
-        difficulty = 2
+        print(colour.bold + "\n-------------\n Begin Game!\n-------------" + colour.end)
+        board(positions)
+        global y
+        y = 1
+        while (winner != True):
+            if (y % 2 == 0):
+                # print(colour.purple + "It's the computers turn!"+colour.end)
+                if computer_hard(y):
+                    board(positions)
+                    y = y + 1
+                    # else:
+                    #    print("\nThat spot is taken! Choose a different spot")
+            else:
+                print(colour.green)
+                if choose('x'):
+                    y = y + 1
+                    # board(positions)
+                else:
+                    print("\nThat spot is taken! Choose a different spot")
 
 
 def play():
@@ -266,12 +335,11 @@ def play():
 
 def help():
     print(colour.bold+"\n------\n Help\n------"+colour.end)
-    print("Tic tac toe is played... bla bla bla")
-    print("This is what the board looks like...")
+    print("Tic tac toe is played by joining 3 X's or O's in a row.")
     help_pos = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
     board(help_pos)
     print("\nThe board is numbered from 1 in the bottom left to 9 in the top right, like a computer num pad.")
-    print("More description needed...")
+    #print("More description needed...")
 
     #Take me back...
     if (input("Press enter to return")):
@@ -315,4 +383,3 @@ while True:
 #coltest()
 #test = input("test: ")
 #input_check(1,10,test)
-
