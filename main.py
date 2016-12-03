@@ -190,6 +190,175 @@ def player_vs_player():
             else:
                 print("\nThat spot is taken! Choose a different spot")
 
+
+
+def check1(positions, xo):
+    if (positions[6] == xo and positions[8] == xo):
+        if positions[7] == " ":
+            positions[7] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[0] == xo and positions[6] == xo):
+        if positions[3] == " ":
+            positions[3] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[1] == xo and positions[7] == xo):
+        if positions[4] == " ":
+            positions[4] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[2] == xo and positions[8] == xo):
+        if positions[5] == " ":
+            positions[5] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[6] == xo and positions[8] == xo):
+        if positions[7] == " ":
+            positions[7] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[3] == xo and positions[5] == xo):
+        if positions[4] == " ":
+            positions[4] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[0] == xo and positions[2] == xo):
+        if positions[1] == " ":
+            positions[1] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[0] == xo and positions[8] == xo):
+        if positions[4] == " ":
+            positions[4] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[6] == xo and positions[2] == xo):
+        if positions[4] == " ":
+            positions[4] = 'x'
+            return True
+        else:
+            return False
+    # Horo
+    # First row
+    elif (positions[0] == xo and positions[1] == xo):
+        if positions[2] == " ":
+            positions[2] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[1] == xo and positions[2] == xo):
+        if positions[0] == " ":
+            positions[0] = 'x'
+            return True
+        else:
+            return False
+    # Second row
+    elif (positions[3] == xo and positions[4] == xo):
+        if positions[5] == " ":
+            positions[5] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[4] == xo and positions[5] == xo):
+        if positions[3] == " ":
+            positions[3] = 'x'
+            return True
+        else:
+            return False
+    # Third Row
+    elif (positions[6] == xo and positions[7] == xo):
+        if positions[8] == " ":
+            positions[8] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[7] == xo and positions[8] == xo):
+        if positions[6] == " ":
+            positions[6] = 'x'
+            return True
+        else:
+            return False
+
+    # Vertical
+    # First
+    elif (positions[0] == xo and positions[3] == xo):
+        positions[6] = 'x'
+        if positions[6] == " ":
+            positions[6] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[1] == xo and positions[4] == xo):
+        if positions[7] == " ":
+            positions[7] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[2] == xo and positions[5] == xo):
+        if positions[8] == " ":
+            positions[8] = 'x'
+            return True
+        else:
+            return False
+    # Second
+    elif (positions[3] == xo and positions[6] == xo):
+        if positions[0] == " ":
+            positions[0] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[4] == xo and positions[7] == xo):
+        if positions[1] == " ":
+            positions[1] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[5] == xo and positions[8] == xo):
+        if positions[2] == " ":
+            positions[2] = 'x'
+            return True
+        else:
+            return False
+
+    # Diag
+    elif (positions[0] == xo and positions[4] == xo):
+        if positions[8] == " ":
+            positions[8] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[4] == xo and positions[8] == xo):
+        if positions[0] == " ":
+            positions[0] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[2] == xo and positions[4] == xo):
+        if positions[2] == " ":
+            positions[2] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[4] == xo and positions[6] == xo):
+        if positions[2] == " ":
+            positions[2] = 'x'
+            return True
+        else:
+            return False
+
+    else:
+        return False
+
+
 def computer_easy():
     global winner
     rand = randint(0,8)
@@ -209,50 +378,86 @@ def computer_easy():
 def computer_hard(turn):
     global winner
     print(turn)
-    if(turn == 2):
+    if(turn == 1):
         print("Computer 1")
-        if(positions[4] == "x"):
-            positions[0] = 'o'
-        else:
-            positions[4] = 'o'
+        positions[6] = 'x'
         return True
 
-    if (turn == 4):
+    if (turn == 3):
         print("Computer 2")
-        if worker(positions) == False:
-            if (positions[0] == "o"):
-                if (positions[3] == " "):
-                    positions[3] = 'o'
-                elif (positions[1] == " "):
-                    positions[1] = 'o'
-            elif (positions[4] == "o"):
-                if (positions[1] == " "):
-                    positions[1] = 'o'
-                elif (positions[5] == " "):
-                    positions[5] = 'o'
-                elif (positions[7] == " "):
-                    positions[7] = 'o'
-            else:
-                print("This should never be seen")
+        if check_space(positions, 2):
+            positions[2] = 'x'
+        else:
+            positions[0] = 'x'
         return True
 
-    if (turn == 6):
-        print("Computer 3")
-        worker1(positions)
+    if (turn == 5):
+        print(colour.end+"Computer 3")
+        if check1(positions, 'x'):
+            if check_win(positions, 'x'):
+                win('x')
+                winner = True
+        elif check1(positions, 'o'):
+            if check_win(positions, 'x'):
+                win('x')
+                winner = True
+        else:
+            if check_space(positions, 6):
+                positions[6] = 'x'
+            elif check_space(positions, 8):
+                positions[8] = 'x'
+            elif check_space(positions, 0):
+                positions[0] = 'x'
+            elif check_space(positions, 2):
+                positions[2] = 'x'
         return True
 
-    #print(rand)
-    '''if check_space(positions, rand):
-        positions[rand] = 'o'
-        if check_win(positions, 'o'):
-            win('o')
-            winner = True
-        elif check_tie(positions):
-            print("\nIt's a tie!"+colour.end)
-            winner = True
-    '''
-        #board(positions)
-    #return True
+    if (turn == 7):
+        print(colour.end+"Computer 4")
+        if check1(positions, 'x'):
+            print("y")
+            if check_win(positions, 'x'):
+                win('x')
+                winner = True
+        elif check1(positions, 'o'):
+            print("ye")
+            if check_win(positions, 'x'):
+                win('x')
+                winner = True
+        else:
+            print("yes")
+            if check_space(positions, 6):
+                positions[6] = 'x'
+            elif check_space(positions, 8):
+                positions[8] = 'x'
+            elif check_space(positions, 0):
+                positions[0] = 'x'
+            elif check_space(positions, 2):
+                positions[2] = 'x'
+        return True
+
+    if (turn == 9):
+        print(colour.end+"Computer 5")
+        if check_space(positions, 0):
+            positions[0] = 'x'
+        elif check_space(positions, 1):
+            positions[1] = 'x'
+        elif check_space(positions, 2):
+            positions[2] = 'x'
+        elif check_space(positions, 3):
+            positions[3] = 'x'
+        elif check_space(positions, 4):
+            positions[4] = 'x'
+        elif check_space(positions, 5):
+            positions[5] = 'x'
+        elif check_space(positions, 6):
+            positions[6] = 'x'
+        elif check_space(positions, 7):
+            positions[7] = 'x'
+        elif check_space(positions, 8):
+            positions[8] = 'x'
+        return True
+
 
 def player_vs_computer():
     print("\nSelect Difficultly")
@@ -299,20 +504,19 @@ def player_vs_computer():
         y = 1
         while (winner != True):
             if (y % 2 == 0):
+                print(colour.green)
+                if choose('o'):
+                    y = y + 1
+                    # board(positions)
+                else:
+                    print("\nThat spot is taken! Choose a different spot")
+            else:
                 # print(colour.purple + "It's the computers turn!"+colour.end)
                 if computer_hard(y):
                     board(positions)
                     y = y + 1
                     # else:
                     #    print("\nThat spot is taken! Choose a different spot")
-            else:
-                print(colour.green)
-                if choose('x'):
-                    y = y + 1
-                    # board(positions)
-                else:
-                    print("\nThat spot is taken! Choose a different spot")
-
 
 def play():
     #Player or computer selection

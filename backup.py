@@ -106,6 +106,113 @@ def worker(positions):
             return True
         else:
             return False
+    # Horo
+    # First row
+    if (positions[0] == xo and positions[1] == xo):
+        if positions[2] == " ":
+            positions[2] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[1] == xo and positions[2] == xo):
+        if positions[0] == " ":
+            positions[0] = 'x'
+            return True
+        else:
+            return False
+    # Second row
+    elif (positions[3] == xo and positions[4] == xo):
+        if positions[5] == " ":
+            positions[5] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[4] == xo and positions[5] == xo):
+        if positions[3] == " ":
+            positions[3] = 'x'
+            return True
+        else:
+            return False
+    # Third Row
+    elif (positions[6] == xo and positions[7] == xo):
+        if positions[8] == " ":
+            positions[8] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[7] == xo and positions[8] == xo):
+        if positions[6] == " ":
+            positions[6] = 'x'
+            return True
+        else:
+            return False
+
+    # Vertical
+    # First
+    elif (positions[0] == xo and positions[3] == xo):
+        positions[6] = 'x'
+        if positions[6] == " ":
+            positions[6] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[1] == xo and positions[4] == xo):
+        if positions[7] == " ":
+            positions[7] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[2] == xo and positions[5] == xo):
+        if positions[8] == " ":
+            positions[8] = 'x'
+            return True
+        else:
+            return False
+    # Second
+    elif (positions[3] == xo and positions[6] == xo):
+        if positions[0] == " ":
+            positions[0] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[4] == xo and positions[7] == xo):
+        if positions[1] == " ":
+            positions[1] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[5] == xo and positions[8] == xo):
+        if positions[2] == " ":
+            positions[2] = 'x'
+            return True
+        else:
+            return False
+
+    # Diag
+    elif (positions[0] == xo and positions[4] == xo):
+        if positions[8] == " ":
+            positions[8] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[4] == xo and positions[8] == xo):
+        if positions[0] == " ":
+            positions[0] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[2] == xo and positions[4] == xo):
+        if positions[2] == " ":
+            positions[2] = 'x'
+            return True
+        else:
+            return False
+    elif (positions[4] == xo and positions[6] == xo):
+        if positions[2] == " ":
+            positions[2] = 'x'
+            return True
+        else:
+            return False
 
     else:
         return False
