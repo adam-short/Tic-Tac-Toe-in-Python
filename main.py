@@ -1,6 +1,4 @@
-#TIC TAC TOE BY FLYNN TESORIERO
-#TODO: Clean the positions list after winning
-
+# -*- coding: utf-8 -*-
 #For delays
 import time
 
